@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ClimaBot Chat</title>
+    <style>
+      body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
+      #chatbox { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; }
+      .user { color: blue; margin-bottom: 5px; }
+      .bot { color: green; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h2>ClimaBot - Chat</h2>
+    <div id="chatbox"></div>
+    <input type="text" id="msg" autocomplete="off" placeholder="Escribe tu mensaje..." style="width:80%;">
+    <button onclick="sendMsg()">Enviar</button>
+
+    <script>
+      let nombre = "";
+      let esperandoNombre = true;
+      let esperandoConsultaLibre = false;
+
+      function addMessage(sender, text) {
+          const chatbox = document.getElementById('chatbox');
+          const msgDiv = document.createElement('div');
+          msgDiv.className = sender;
+          msgDiv.textContent = (sender === 'user' ? "Tú: " : "Bot: ") + text;
+          chatbox.appendChild(msgDiv);
+          chatbox.scrollTop = chatbox.scrollHeight;
+      }
+
+      function sendMsg() {
+          const input = document.getElementById('msg');
+          let message = input.value.trim();
+          if (!message) return;
+          addMessage('user', message);
+          input.value = '';
+
+          if (esperandoNombre) {
+              nombre = message;
+              esperandoNombre = false;
+              addMessage('bot', `Mucho gusto, ${nombre}. ¿En qué podemos ayudarte hoy?\n1. Instalación\n2. Mantenimiento\n3. Carga de gas\n4. Venta de equipo minisplit\n5. Otra consulta`);
+              return;
+          }
+
+          if (esperandoConsultaLibre) {
+              message = "mensaje:" + message;
+              esperandoConsultaLibre = false;
+          }
+
+          fetch('/chat', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({message: message, nombre: nombre})
+          })
+          .then(res => res.json())
+          .then(data => {
+              addMessage('bot', data.reply);
+              if (data.reply.toLowerCase().includes("por favor escribe tu mensaje")) {
+                  esperandoConsultaLibre = true;
+              }
+          });
+      }
+
+      window.onload = () => {
+          addMessage('bot', "🤖 Hola, bienvenido a *ClimaBot* 🌬️\n¿Cómo te llamas?");
+      };
+    </script>
+</body>
+</html>
