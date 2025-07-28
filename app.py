@@ -30,7 +30,7 @@ def chat():
             )
             estado_espera.pop(nombre)  # Salir del estado de espera
         elif respuesta in ["no", "n"]:
-            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp. ¡Buen día!"
+            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp (opcion 5). ¡Buen día!"
             estado_espera.pop(nombre)  # Salir del estado de espera
         elif respuesta in ["1", "2", "3", "4", "5"]:
             reply = "Por favor responde **sí** o **no** antes de continuar."
