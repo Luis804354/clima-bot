@@ -19,6 +19,7 @@ def chat():
     # Manejo del estado de confirmación
     if nombre in estado_espera and estado_espera[nombre] == "confirmacion":
         respuesta = user_msg
+        
         if respuesta in ["si", "sí", "s"]:
             reply = (
                 f"¡Perfecto {nombre}! ¿En qué puedo ayudarte?\n"
@@ -28,14 +29,15 @@ def chat():
                 "4. Venta de equipo minisplit\n"
                 "5. Contacto"
             )
-            estado_espera.pop(nombre)  # Salir del estado de espera
+            estado_espera.pop(nombre)  # Salir del estado confirmación para permitir nuevas opciones
+        
         elif respuesta in ["no", "n"]:
-            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp (opcion 5). ¡Buen día!"
-            estado_espera.pop(nombre)  # Salir del estado de espera
-        elif respuesta in ["1", "2", "3", "4", "5"]:
-            reply = "Por favor responde **sí** o **no** antes de continuar."
+            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp. ¡Buen día!"
+            estado_espera.pop(nombre)  # Salir del estado confirmación
+        
         else:
-            reply = "Por favor responde **sí** o **no**."
+            reply = "Por favor responde **sí** o **no** antes de continuar."
+        
         return jsonify({"reply": reply})
 
     # Opciones principales
@@ -74,4 +76,3 @@ def chat():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
