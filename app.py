@@ -3,7 +3,6 @@ import os
 
 app = Flask(__name__)
 
-# Variable global para manejar el estado de confirmación
 estado_espera = {}
 
 @app.route("/")
@@ -16,7 +15,6 @@ def chat():
     user_msg = data.get("message", "").strip().lower()
     nombre = data.get("nombre", "Cliente")
 
-    # Manejo del estado de confirmación
     if nombre in estado_espera and estado_espera[nombre] == "confirmacion":
         respuesta = user_msg
         
@@ -29,18 +27,24 @@ def chat():
                 "4. Venta de equipo minisplit\n"
                 "5. Contacto"
             )
-            estado_espera.pop(nombre)  # Salir del estado confirmación para permitir nuevas opciones
-        
+            estado_espera.pop(nombre)
         elif respuesta in ["no", "n"]:
             reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp. ¡Buen día!"
-            estado_espera.pop(nombre)  # Salir del estado confirmación
-        
+            estado_espera.pop(nombre)
         else:
-            reply = "Por favor responde **sí** o **no** antes de continuar."
-        
+            # Si no es sí ni no, mostramos el menú sin insistir
+            reply = (
+                f"Entendido, {nombre}. ¿En qué puedo ayudarte?\n"
+                "1. Instalación\n"
+                "2. Mantenimiento\n"
+                "3. Carga de gas\n"
+                "4. Venta de equipo minisplit\n"
+                "5. Contacto"
+            )
+            estado_espera.pop(nombre)
+
         return jsonify({"reply": reply})
 
-    # Opciones principales
     if user_msg in ["1", "instalacion", "instalación"]:
         reply = "💡 Instalación de minisplit: $1,600 MXN hasta $1,900 MXN (varía dependiendo la ubicación).\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
         estado_espera[nombre] = "confirmacion"
