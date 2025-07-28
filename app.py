@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -15,9 +16,10 @@ def chat():
     user_msg = data.get("message", "").strip().lower()
     nombre = data.get("nombre", "Cliente")
 
-    # Si está esperando respuesta de confirmación
+    # Manejo del estado de confirmación
     if nombre in estado_espera and estado_espera[nombre] == "confirmacion":
-        if user_msg in ["si", "sí", "s"]:
+        respuesta = user_msg
+        if respuesta in ["si", "sí", "s"]:
             reply = (
                 f"¡Perfecto {nombre}! ¿En qué puedo ayudarte?\n"
                 "1. Instalación\n"
@@ -27,9 +29,11 @@ def chat():
                 "5. Contacto"
             )
             estado_espera.pop(nombre)  # Salir del estado de espera
-        elif user_msg in ["no", "n"]:
-            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp (opcion 5 contacto). ¡Buen día!"
+        elif respuesta in ["no", "n"]:
+            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp. ¡Buen día!"
             estado_espera.pop(nombre)  # Salir del estado de espera
+        elif respuesta in ["1", "2", "3", "4", "5"]:
+            reply = "Por favor responde **sí** o **no** antes de continuar."
         else:
             reply = "Por favor responde **sí** o **no**."
         return jsonify({"reply": reply})
@@ -50,7 +54,7 @@ def chat():
     elif user_msg in ["5", "contacto", "whatsapp"]:
         reply = (
             "Whatsapp: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>\n\n"
-            f"¿Tienes otra duda {nombre} ? (Responde **sí** o **no**)"
+            "¿Tienes otra duda? (Responde **sí** o **no**)"
         )
         estado_espera[nombre] = "confirmacion"
     elif user_msg == "hola":
@@ -68,4 +72,6 @@ def chat():
     return jsonify({"reply": reply})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+
