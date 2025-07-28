@@ -29,7 +29,7 @@ def chat():
             )
             estado_espera.pop(nombre)
         elif respuesta in ["no", "n"]:
-            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp. ¡Buen día!"
+            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp (opcion 5). ¡Buen día!"
             estado_espera.pop(nombre)
         else:
             # Si no es sí ni no, mostramos el menú sin insistir
@@ -59,7 +59,7 @@ def chat():
         estado_espera[nombre] = "confirmacion"
     elif user_msg in ["5", "contacto", "whatsapp"]:
         reply = (
-            "Whatsapp: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>\n\n"
+            "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>\n\n"
             "¿Tienes otra duda? (Responde **sí** o **no**)"
         )
         estado_espera[nombre] = "confirmacion"
