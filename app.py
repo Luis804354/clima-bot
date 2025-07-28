@@ -55,7 +55,7 @@ def chat():
         reply = "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
         estado_espera[nombre] = "confirmacion"
     elif user_msg in ["4", "venta de equipo", "venta de equipo minisplit"]:
-        reply = "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor $6,900 MXN (precio con instalación).\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
+        reply = "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación), pregunta tambien por nuestros equipos usados en venta.\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
         estado_espera[nombre] = "confirmacion"
     elif user_msg in ["5", "contacto", "whatsapp"]:
         reply = (
