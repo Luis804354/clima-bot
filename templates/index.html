@@ -3,30 +3,137 @@
 <head>
     <title>ClimaBot Chat</title>
     <style>
-      body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; }
-      #chatbox { border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; }
+      *{
+        outline: none;
+      }
+      body { font-family: Arial; max-width: 600px; margin: auto; padding: 20px; background-color:#e0f7ff;}
+      #chatbox { border: 3px solid #00aaff; height: 300px; overflow-y: scroll; padding: 10px; border-radius: 15px; background-color: #fff; margin: 10px;}
       .user { color: blue; margin-bottom: 5px; }
       .bot { color: green; margin-bottom: 5px; }
+      .title_container { width: 100%; height: 80px; background-color: #007acc; display: flex; justify-content: center; align-items: center; border-radius: 10px;}
+      .title_container h2{ font-size: 40px; color: #ffffff; }
+
+      .input_container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .input_container input{
+        height: 25px;
+        border: 2px solid #00aaff;
+        border-radius: 5px;
+        transition: all 0.3s;
+      }
+
+      .input_container input:focus{
+        border-color: #00c2cb;
+      }
+
+      button {
+      font-family: inherit;
+      font-size: 15px;
+      background: #005f99;
+      color: white;
+      padding: 0.7em 1em;
+      padding-left: 0.9em;
+      display: flex;
+      align-items: center;
+      border: none;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.2s;
+      cursor: pointer;
+      }
+
+button span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+button svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+  animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+  transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+  transform: translateX(5em);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+  from {
+    transform: translateY(0.1em);
+  }
+
+  to {
+    transform: translateY(-0.1em);
+  }
+}
+
+      }
     </style>
 </head>
 <body>
-    <h2>ClimaBot - Chat</h2>
+    <div class="title_container">
+        <h2 class="title">ClimaBot - Chat</h2>
+    </div>
+
     <div id="chatbox"></div>
-    <input type="text" id="msg" autocomplete="off" placeholder="Escribe tu mensaje..." style="width:80%;">
-    <button onclick="sendMsg()">Enviar</button>
+    <div class="input_container">
+      <input type="text" id="msg" autocomplete="off" placeholder="Escribe tu mensaje..." style="width:70%;">
+      <button onclick="sendMsg()">
+        <div class="svg-wrapper-1">
+          <div class="svg-wrapper">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+            >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+            fill="currentColor"
+            d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+            ></path>
+            </svg>
+          </div>
+        </div>
+        <span>Enviar</span>
+      </button>
+    </div>
+
+
 
     <script>
       let nombre = "";
       let esperandoNombre = true;
       let esperandoConsultaLibre = false;
 
-      function addMessage(sender, text) {
-          const chatbox = document.getElementById('chatbox');
-          const msgDiv = document.createElement('div');
-          msgDiv.className = sender;
-          msgDiv.textContent = (sender === 'user' ? "Tú: " : "Bot: ") + text;
-          chatbox.appendChild(msgDiv);
-          chatbox.scrollTop = chatbox.scrollHeight;
+     
+         function addMessage(sender, text) {
+    const chatbox = document.getElementById('chatbox');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = sender;
+    // Reemplazamos \n por <br> y usamos innerHTML
+    msgDiv.innerHTML = (sender === 'user' ? "Tú: " : "Bot: ") + text.replace(/\n/g, "<br>");
+    chatbox.appendChild(msgDiv);
+    chatbox.scrollTop = chatbox.scrollHeight;
+
       }
 
       function sendMsg() {
@@ -39,7 +146,7 @@
           if (esperandoNombre) {
               nombre = message;
               esperandoNombre = false;
-              addMessage('bot', `Mucho gusto, ${nombre}. ¿En qué podemos ayudarte hoy?\n1. Instalación\n2. Mantenimiento\n3. Carga de gas\n4. Venta de equipo minisplit\n5. Otra consulta`);
+              addMessage('bot', `Mucho gusto, ${nombre}. ¿En qué podemos ayudarte hoy?\n1. Instalación\n2. Mantenimiento\n3. Carga de gas\n4. Venta de equipo minisplit\n5. Contacto`);
               return;
           }
 
