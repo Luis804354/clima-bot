@@ -150,14 +150,14 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 12px rgba(0, 170, 255, 0.4);
+      box-shadow: 0 6px 20px rgba(0, 170, 255, 0.6);
       transition: background 0.25s, transform 0.15s;
       user-select: none;
     }
 
     .option-btn:hover {
       background: #008ecc;
-      transform: scale(1.05);
+      transform: scale(1.06);
     }
 
     .option-btn:disabled {
@@ -169,7 +169,7 @@
     /* Botones Sí y No personalizados */
     .option-yes {
       background: #28a745;
-      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.5);
+      box-shadow: 0 6px 20px rgba(40, 167, 69, 0.7);
     }
     .option-yes:hover {
       background: #218838;
@@ -177,57 +177,64 @@
 
     .option-no {
       background: #dc3545;
-      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.5);
+      box-shadow: 0 6px 20px rgba(220, 53, 69, 0.7);
     }
     .option-no:hover {
       background: #c82333;
     }
 
+    /* Fondo especial detrás del input y botón */
     .input-container {
       display: flex;
       border-top: 1px solid #ddd;
-      padding: 10px 14px;
-      gap: 10px;
-      background: #f9fbfd;
+      padding: 14px 18px;
+      gap: 12px;
+      background: #d0e7ffcc; /* Color azul suave con transparencia */
+      box-shadow: inset 0 0 12px #a7c8ffaa;
+      border-radius: 0 0 20px 20px;
     }
 
     .input-container textarea {
       flex: 1;
-      padding: 12px 14px;
+      padding: 14px 16px;
       font-size: 16px;
       border: 2px solid #007acc;
-      border-radius: 12px;
+      border-radius: 14px;
       outline: none;
       resize: none;
       max-height: 130px;
       line-height: 1.3;
       font-family: 'Poppins', Arial, sans-serif;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 5px #007acc88;
     }
     .input-container textarea:focus {
       border-color: #005a9e;
-      box-shadow: 0 0 8px rgba(0,90,158,0.3);
+      box-shadow: 0 0 12px #005a9eaa;
     }
 
     .input-container button {
       background: #007acc;
       color: white;
       border: none;
-      border-radius: 12px;
-      padding: 0 20px;
-      font-size: 17px;
+      border-radius: 14px;
+      padding: 0 24px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, box-shadow 0.3s;
       user-select: none;
+      box-shadow: 0 6px 20px rgba(0, 122, 204, 0.7);
     }
 
     .input-container button:hover:not(:disabled) {
       background: #005a9e;
+      box-shadow: 0 8px 30px rgba(0, 90, 158, 0.9);
     }
     .input-container button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+      box-shadow: none;
     }
 
     /* Animación aparición mensajes */

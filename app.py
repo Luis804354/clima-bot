@@ -59,12 +59,12 @@ def chat():
         "venta de equipo": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
         "venta de equipo minisplit": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
 
-        "5": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
+        "5": "Whatsapp para contacto, da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
         "contacto": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
         "whatsapp": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
 
         # Nueva opción 6
-        "6": "Whatsapp da clic: <a href='https://wa.me/6641869369' target='_blank'>6641869369</a>",
+        "6": "Whatsapp para informacion sobre los equipos, da clic: <a href='https://wa.me/6641869369' target='_blank'>6641869369</a>",
         "equipos usados": "Whatsapp da clic: <a href='https://wa.me/6641869369' target='_blank'>6641869369</a>"
     }
 
