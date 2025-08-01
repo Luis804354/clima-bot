@@ -13,7 +13,8 @@ def menu_principal(nombre):
         "2. Mantenimiento\n"
         "3. Carga de gas\n"
         "4. Venta de equipo minisplit\n"
-        "5. Contacto"
+        "5. Contacto\n"
+        "6. Equipos usados"
     )
 
 confirmacion = "\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
@@ -58,7 +59,13 @@ def chat():
         "venta de equipo": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
         "venta de equipo minisplit": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
 
-        "5": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>"
+        "5": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
+        "contacto": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
+        "whatsapp": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
+
+        # Nueva opción 6
+        "6": "Whatsapp da clic: <a href='https://wa.me/6641869369' target='_blank'>6641869369</a>",
+        "equipos usados": "Whatsapp da clic: <a href='https://wa.me/6641869369' target='_blank'>6641869369</a>"
     }
 
     if user_msg in opciones:
@@ -67,7 +74,7 @@ def chat():
     elif user_msg == "hola":
         reply = menu_principal(nombre)
     else:
-        reply = "Lo siento, no entendí eso. Por favor responde con un número del 1 al 5 o 'hola' para el menú."
+        reply = "Lo siento, no entendí eso. Por favor responde con un número del 1 al 6 o 'hola' para el menú."
 
     return jsonify({"reply": reply})
 
