@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>ClimaBot Chat</title>
   <style>
     * {
@@ -107,117 +107,25 @@
     .input-container {
       display: flex;
       border-top: 1px solid #ccc;
+      padding: 8px;
+      gap: 8px;
     }
 
-    .input-container input {
+    /* Cambiado input por textarea y estilos para autogrow */
+    .input-container textarea {
       flex: 1;
       padding: 10px;
+      font-size: 16px;
       border: none;
       outline: none;
-      font-size: 16px;
+      resize: none;
+      overflow-y: hidden; /* inicialmente oculto scroll */
+      max-height: 120px; /* máximo 4-5 líneas aprox */
+      border-radius: 6px;
+      font-family: Arial, sans-serif;
     }
 
     .input-container button {
       background: #007acc;
       color: #fff;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-</head>
-<body>
-  <div class="chat-container">
-    <div class="chat-header">🤖 ClimaBot</div>
-    <div class="chatbox" id="chatbox"></div>
-    <div class="input-container">
-      <input type="text" id="msg" placeholder="Escribe tu mensaje...">
-      <button onclick="sendMsg()">Enviar</button>
-    </div>
-  </div>
-
-  <script>
-    let nombre = "";
-    let esperandoNombre = true;
-
-    function addMessage(sender, text, withOptions = false) {
-      const chatbox = document.getElementById('chatbox');
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `message ${sender}`;
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.innerHTML = text.replace(/\n/g, "<br>");
-      msgDiv.appendChild(bubble);
-
-      // Si el bot manda opciones
-      if (sender === 'bot' && withOptions) {
-        const optionsDiv = document.createElement('div');
-        optionsDiv.className = 'options';
-
-        const opciones = [
-          "1. Instalación",
-          "2. Mantenimiento",
-          "3. Carga de gas",
-          "4. Venta de equipo minisplit",
-          "5. Contacto",
-          "6. Equipos usados"
-        ];
-
-        opciones.forEach(op => {
-          const btn = document.createElement('button');
-          btn.className = 'option-btn';
-          btn.textContent = op;
-          btn.onclick = () => {
-            sendMsg(op.split('.')[0]); // Solo el número como mensaje
-          };
-          optionsDiv.appendChild(btn);
-        });
-
-        msgDiv.appendChild(optionsDiv);
-      }
-
-      chatbox.appendChild(msgDiv);
-      chatbox.scrollTop = chatbox.scrollHeight;
-    }
-
-    function sendMsg(message = null) {
-      const input = document.getElementById('msg');
-      if (!message) {
-        message = input.value.trim();
-      }
-      if (!message) return;
-
-      addMessage('user', message);
-      input.value = '';
-
-      if (esperandoNombre) {
-        nombre = message;
-        esperandoNombre = false;
-        addMessage('bot', `Mucho gusto, ${nombre}. ¿En qué podemos ayudarte hoy?`, true);
-        return;
-      }
-
-      fetch('/chat', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({message: message, nombre: nombre})
-      })
-      .then(res => res.json())
-      .then(data => {
-        const tieneMenu = data.reply.includes("¿En qué puedo ayudarte?");
-        addMessage('bot', data.reply, tieneMenu);
-      });
-    }
-
-    window.onload = () => {
-      addMessage('bot', "🤖 Hola, bienvenido a *ClimaBot* 🌬️\n¿Cómo te llamas?");
-    };
-  </script>
-</body>
-</html>
+      b
