@@ -5,6 +5,19 @@ app = Flask(__name__)
 
 estado_espera = {}
 
+# Texto del menú principal (solo se define una vez)
+def menu_principal(nombre):
+    return (
+        f"¡Hola {nombre}! ¿En qué puedo ayudarte?\n"
+        "1. Instalación\n"
+        "2. Mantenimiento\n"
+        "3. Carga de gas\n"
+        "4. Venta de equipo minisplit\n"
+        "5. Contacto"
+    )
+
+confirmacion = "\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
+
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -15,63 +28,44 @@ def chat():
     user_msg = data.get("message", "").strip().lower()
     nombre = data.get("nombre", "Cliente")
 
+    # Si está en estado de confirmación
     if nombre in estado_espera and estado_espera[nombre] == "confirmacion":
         respuesta = user_msg
-        
-        if respuesta in ["si", "sí", "s"]:
-            reply = (
-                f"¡Perfecto {nombre}! ¿En qué puedo ayudarte?\n"
-                "1. Instalación\n"
-                "2. Mantenimiento\n"
-                "3. Carga de gas\n"
-                "4. Venta de equipo minisplit\n"
-                "5. Contacto"
-            )
-            estado_espera.pop(nombre)
-        elif respuesta in ["no", "n"]:
-            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp (opcion 5). ¡Buen día!"
-            estado_espera.pop(nombre)
-        else:
-            # Si no es sí ni no, mostramos el menú sin insistir
-            reply = (
-                f"Entendido, {nombre}. ¿En qué puedo ayudarte?\n"
-                "1. Instalación\n"
-                "2. Mantenimiento\n"
-                "3. Carga de gas\n"
-                "4. Venta de equipo minisplit\n"
-                "5. Contacto"
-            )
-            estado_espera.pop(nombre)
 
+        if respuesta in ["si", "sí", "s"]:
+            reply = menu_principal(nombre)
+        elif respuesta in ["no", "n"]:
+            reply = f"🙏 Gracias {nombre} por utilizar Clima Bot. Esperamos tu mensaje por WhatsApp (opción 5). ¡Buen día!"
+        else:
+            reply = menu_principal(nombre)
+
+        estado_espera.pop(nombre)
         return jsonify({"reply": reply})
 
-    if user_msg in ["1", "instalacion", "instalación"]:
-        reply = "💡 Instalación de minisplit: $1,600 MXN hasta $1,900 MXN (varía dependiendo la ubicación).\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
-        estado_espera[nombre] = "confirmacion"
-    elif user_msg in ["2", "mantenimiento"]:
-        reply = "🔧 Mantenimiento completo desde $800 MXN por unidad (puede aumentar según ubicación).\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
-        estado_espera[nombre] = "confirmacion"
-    elif user_msg in ["3", "carga de gas"]:
-        reply = "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
-        estado_espera[nombre] = "confirmacion"
-    elif user_msg in ["4", "venta de equipo", "venta de equipo minisplit"]:
-        reply = "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación), pregunta tambien por nuestros equipos usados en venta.\n\n¿Tienes otra duda? (Responde **sí** o **no**)"
-        estado_espera[nombre] = "confirmacion"
-    elif user_msg in ["5", "contacto", "whatsapp"]:
-        reply = (
-            "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>\n\n"
-            "¿Tienes otra duda? (Responde **sí** o **no**)"
-        )
+    # Opciones (usamos un diccionario para evitar varios elif)
+    opciones = {
+        "1": "💡 Instalación de minisplit: $1,600 MXN hasta $1,900 MXN (varía dependiendo la ubicación).",
+        "instalacion": "💡 Instalación de minisplit: $1,600 MXN hasta $1,900 MXN (varía dependiendo la ubicación).",
+        "instalación": "💡 Instalación de minisplit: $1,600 MXN hasta $1,900 MXN (varía dependiendo la ubicación).",
+
+        "2": "🔧 Mantenimiento completo desde $800 MXN por unidad (puede aumentar según ubicación).",
+        "mantenimiento": "🔧 Mantenimiento completo desde $800 MXN por unidad (puede aumentar según ubicación).",
+
+        "3": "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).",
+        "carga de gas": "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).",
+
+        "4": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
+        "venta de equipo": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
+        "venta de equipo minisplit": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
+
+        "5": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>"
+    }
+
+    if user_msg in opciones:
+        reply = opciones[user_msg] + confirmacion
         estado_espera[nombre] = "confirmacion"
     elif user_msg == "hola":
-        reply = (
-            f"¡Hola {nombre}! ¿En qué puedo ayudarte?\n"
-            "1. Instalación\n"
-            "2. Mantenimiento\n"
-            "3. Carga de gas\n"
-            "4. Venta de equipo minisplit\n"
-            "5. Contacto"
-        )
+        reply = menu_principal(nombre)
     else:
         reply = "Lo siento, no entendí eso. Por favor responde con un número del 1 al 5 o 'hola' para el menú."
 
