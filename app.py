@@ -55,7 +55,7 @@ def chat():
         "3": "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).",
         "carga de gas": "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).",
 
-        "4": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,700 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
+        "4": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,400 MXN (precio con instalación BASICA). Pregunta también por nuestros equipos usados en venta.",
         "venta de equipo": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
         "venta de equipo minisplit": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,900 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
 
