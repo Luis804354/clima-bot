@@ -55,9 +55,9 @@ def chat():
         "3": "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).",
         "carga de gas": "⛽ Carga de gas R410A o R22: desde $850 MXN (varía según capacidad y ubicación).",
 
-        "4": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,600 MXN y MIRAGE 1 tonelada en $7,200 MXN(precio con instalación BASICA). Pregunta también por nuestros equipos usados en venta.",
-        "venta de equipo": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,600 MXN y MIRAGE 1 tonelada en $7,200 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
-        "venta de equipo minisplit": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,600 MXN y MIRAGE 1 tonelada en $7,200 MXN(precio con instalación). Pregunta también por nuestros equipos usados en venta.",
+        "4": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,700 MXN y MIRAGE 1 tonelada en $7,200 MXN(precio con instalación BASICA). Pregunta también por nuestros equipos usados en venta.",
+        "venta de equipo": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,700 MXN y MIRAGE 1 tonelada en $7,200 MXN (precio con instalación). Pregunta también por nuestros equipos usados en venta.",
+        "venta de equipo minisplit": "🛒 Venta de equipo minisplit: contamos con equipo BAIR 1 tonelada 110V frío/calor nuevo $6,700 MXN y MIRAGE 1 tonelada en $7,200 MXN(precio con instalación). Pregunta también por nuestros equipos usados en venta.",
 
         "5": "Whatsapp para contacto, da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
         "contacto": "Whatsapp da clic: <a href='https://wa.me/6648095987' target='_blank'>6648095987</a>",
